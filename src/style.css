@@ -1,3 +1,71 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .search-label {
+    margin-bottom: 15px;
+    padding-top: 15px;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .search-control {
+    padding: 8px 15px;
+    width: 300px;
+    border-radius: 5px;
+  }
+
+  .button {
+    background-color: #ad343e;
+    padding: 5px 25px;
+    color: white;
+    font-size: 18px;
+    border: #333 1px solid;
+    border-radius: 5px;
+    display: block;
+    margin: 0 auto;
+    cursor: pointer;
+  }
+
+  #modal > div {
+    background-color: white;
+    max-width: 500px;
+    padding: 15px;
+    text-align: center;
+    border-radius: 30px;
+    background: #faeff0;
+  }
+
+  #modal {
+    background-color: rgba(0, 0, 0, 0.9);
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #modal:empty {
+    display: none;
+  }
+
+  #modal button {
+    background-color: #ad343e;
+    padding: 5px 25px;
+    color: white;
+    font-size: 18px;
+    border: #333 1px solid;
+    border-radius: 5px;
+    display: inline-block;
+    cursor: pointer;
+  }
+}

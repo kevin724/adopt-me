@@ -19,9 +19,9 @@ class Carousel extends Component {
     const { images } = this.props;
 
     return (
-      <div className="carousel">
-        <img src={images[active]} alt="animal"></img>
-        <div className="carousel-smaller">
+      <div className="flex content-around items-center">
+        <img className="w-2/5" src={images[active]} alt="animal"></img>
+        <div>
           {images.map((photo, index) => (
             // should be a button instead of img for accessibility
             // eslint-disable-next-line
@@ -30,7 +30,10 @@ class Carousel extends Component {
               src={photo}
               data-index={index}
               onClick={this.handleIndexClick}
-              className={index === active ? "active" : ""}
+              className={
+                (index === active ? "active opacity-60 border-gray-400" : "") +
+                " rounded-full inline-block w-32 border-2 border-black m-5"
+              }
               alt="animal thumbnail"
             ></img>
           ))}

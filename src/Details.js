@@ -34,16 +34,17 @@ class Details extends Component {
       this.state;
 
     return (
-      <div className="details">
+      <div className="rounded-lg w-2/3 mx-auto mb-5 text-center p-24 bg-red-100">
         <Carousel images={images}></Carousel>
         <div>
-          <h1>{name}</h1>
-          <h2>
+          <h1 className="mt-5 text-5xl font-bold">{name}</h1>
+          <h2 className="font-semibold text-2xl mt-5">
             {animal} - {breed} - {city}, {state}
           </h2>
           <ThemeContext.Consumer>
             {([theme]) => (
               <button
+                className="button"
                 onClick={this.toggleModal}
                 style={{ backgroundColor: theme }}
               >
@@ -51,13 +52,17 @@ class Details extends Component {
               </button>
             )}
           </ThemeContext.Consumer>
-          <p>{description}</p>
+          <p className="mt-5 leading-6 text-left">{description}</p>
           {showModal ? (
             <Modal>
               <div>
-                <h1>Would you like to adopt {name}?</h1>
-                <div className="buttons">
-                  <button onClick={this.adopt}>Yes</button>
+                <h1 className="font-bold text-4xl">
+                  Would you like to adopt {name}?
+                </h1>
+                <div className="w-full inline-block">
+                  <button className="mr-4" onClick={this.adopt}>
+                    Yes
+                  </button>
                   <button onClick={this.toggleModal}>No</button>
                 </div>
               </div>
