@@ -20,7 +20,12 @@ class Carousel extends Component {
 
     return (
       <div className="flex content-around items-center">
-        <img className="w-2/5" src={images[active]} alt="animal"></img>
+        <img
+          data-testid="hero"
+          className="w-2/5"
+          src={images[active]}
+          alt="animal"
+        ></img>
         <div>
           {images.map((photo, index) => (
             // should be a button instead of img for accessibility
@@ -30,6 +35,7 @@ class Carousel extends Component {
               src={photo}
               data-index={index}
               onClick={this.handleIndexClick}
+              data-testid={`thumbnail${index}`}
               className={
                 (index === active ? "active opacity-60 border-gray-400" : "") +
                 " rounded-full inline-block w-32 border-2 border-black m-5"
