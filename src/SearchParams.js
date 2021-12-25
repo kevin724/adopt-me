@@ -2,12 +2,15 @@ import { useState, useEffect, useContext } from "react";
 import ThemeContext from "./ThemeContext";
 import useBreedList from "./useBreedList";
 import Results from "./Results";
+import { Client } from "@petfinder/petfinder-js";
+
+const client = new Client({apiKey: "L2K9g2D5reuhBZwW5VmhslDoVdQ5ASjz3iYOaOlGvZyygJMSlE", secret: "TJpZNSW3xwIOVc8ywv9gAMCQ4f3II1zYPqTsik6m"});
 
 const ANIMALS = ["bird", "cat", "dog", "rabbit", "reptile"];
 
 const SearchParams = () => {
   const [location, setLocation] = useState("");
-  const [animal, setAnimal] = useState("");
+  const [animal, setAnimal] = useState("dog");
   const [breed, setBreed] = useState("");
   const [pets, setPets] = useState([]);
   const [breeds] = useBreedList(animal);
@@ -18,12 +21,27 @@ const SearchParams = () => {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   async function requestPets() {
-    const res = await fetch(
-      `http://pets-v2.dev-apis.com/pets?animal=${animal}&location=${location}&breed=${breed}`
-    );
-    const json = await res.json();
+    client.animal.search({
+      type:animal,
+      breed:breed,
+      page:1,
+      limit:10
+    })
+    .then(function (response) {
+        // Do something with `response.data.animals`
+        console.log(response);
+        setPets(response.data.animals);
+    })
+    .catch(function (error) {
+        // Handle the error
+    });
 
-    setPets(json.pets);
+    // const res = await fetch(
+    //   `http://pets-v2.dev-apis.com/pets?animal=${animal}&location=${location}&breed=${breed}`
+    // );
+    // const json = await res.json();
+
+    // setPets(response.animals);
   }
 
   return (
