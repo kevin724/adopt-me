@@ -25,12 +25,12 @@ const SearchParams = () => {
       type:animal,
       breed:breed,
       page:1,
-      limit:10
+      limit:100
     })
     .then(function (response) {
         // Do something with `response.data.animals`
-        console.log(response);
-        setPets(response.data.animals);
+        const animals = response.data.animals.filter(animal => animal.photos.length);
+        setPets(animals);
     })
     .catch(function (error) {
         // Handle the error
