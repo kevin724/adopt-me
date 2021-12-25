@@ -38,7 +38,7 @@ class Carousel extends Component {
               data-testid={`thumbnail${index}`}
               className={
                 (index === active ? "active opacity-60 border-gray-400" : "") +
-                " rounded-full inline-block w-32 border-2 border-black m-5"
+                " inline-block w-32 border-2 border-black m-5"
               }
               alt="animal thumbnail"
             ></img>

@@ -4,23 +4,33 @@ import Carousel from "./Carousel";
 import ErrorBoundary from "./ErrorBoundary";
 import ThemeContext from "./ThemeContext";
 import Modal from "./Modal";
+import { Client } from "@petfinder/petfinder-js";
 
+const client = new Client({apiKey: "L2K9g2D5reuhBZwW5VmhslDoVdQ5ASjz3iYOaOlGvZyygJMSlE", secret: "TJpZNSW3xwIOVc8ywv9gAMCQ4f3II1zYPqTsik6m"});
 class Details extends Component {
   state = { loading: true, showModal: false };
 
   async componentDidMount() {
-    const res = await fetch(
-      `http://pets-v2.dev-apis.com/pets?id=${this.props.match.params.id}`
-    );
-    const json = await res.json();
-    this.setState(
-      Object.assign(
-        {
-          loading: false,
-        },
-        json.pets[0]
-      )
-    );
+    client.animal.show(this.props.match.params.id)
+    .then(response => {
+      // Do something with resp.data.animal
+      console.log(response);
+      const animal = response.data.animal;
+      this.setState(
+        Object.assign(
+          {
+            loading: false,
+            animal: animal.type,
+            breed: animal.breeds.primary,
+            city: animal.contact.address.city,
+            state: animal.contact.address.state,
+            description: animal.description,
+            name: animal.name,
+            images: animal.photos.map(photo => photo.medium)
+          }
+        )
+      );
+    });
   }
 
   toggleModal = () => this.setState({ showModal: !this.state.showModal });
